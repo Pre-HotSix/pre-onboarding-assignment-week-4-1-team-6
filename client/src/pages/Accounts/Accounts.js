@@ -1,49 +1,48 @@
-import { getUserData, getUsers } from 'apis';
+import { getAccountData, getAccounts, getUserData, getUsers } from 'apis';
 import { useQueries } from 'react-query';
 import { Pagination, Table } from 'antd';
 import { useRecoilState } from 'recoil';
-import { usersState } from 'recoil/users';
-import { USER_TABLE_COLUMNS } from 'constants';
 import PropTypes from 'prop-types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { accountsState } from 'recoil/accounts';
+import { ACCOUNT_TABLE_COLUMNS } from 'constants';
 import { removeToken } from 'utils/Storage';
 
-Users.propTypes = {
+Accounts.propTypes = {
   params: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
 };
 
-export default function Users({ params, pathname }) {
+export default function Accounts({ params, pathname }) {
   const navigate = useNavigate();
   const search = new URLSearchParams(params);
   const limit = search.get('_limit');
   const page = search.get('_page');
   const [total, setTotal] = useState(0);
-  const [users, setUsers] = useRecoilState(usersState);
+  const [accounts, setAccounts] = useRecoilState(accountsState);
   const [getAllUser, getUsersPage] = useQueries([
     {
-      queryKey: ['all_users'],
-      queryFn: () => getUsers(),
+      queryKey: ['all_accounts'],
+      queryFn: () => getAccounts(),
       onSuccess: ({ data }) => {
-        const filterData = data.filter((user) => user.name !== undefined);
-        setTotal(filterData.length);
+        setTotal(data.length);
       },
       onError: (error) => {
-        console.log('Users.js => ', error);
+        console.log('Accounts.js => ', error);
         alert('재로그인을 해주세요.');
         removeToken();
         navigate('/');
       },
     },
     {
-      queryKey: ['users', params],
-      queryFn: () => getUserData(params),
+      queryKey: ['accounts', params],
+      queryFn: () => getAccountData(params),
       onSuccess: ({ data }) => {
-        setUsers([...data.filter((user) => user.name !== undefined)]);
+        setAccounts([...data]);
       },
       onError: (error) => {
-        console.log('Users.js user data page => ', error);
+        console.log('Accounts.js user data page => ', error);
       },
     },
   ]);
@@ -55,9 +54,9 @@ export default function Users({ params, pathname }) {
   return (
     <>
       <Table
-        rowKey={'id'}
-        columns={USER_TABLE_COLUMNS}
-        dataSource={users}
+        rowKey={'uuid'}
+        columns={ACCOUNT_TABLE_COLUMNS}
+        dataSource={accounts}
         pagination={false}
       />
       <Pagination

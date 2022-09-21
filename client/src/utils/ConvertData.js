@@ -21,3 +21,8 @@ export const maskingPhone = (phone) => {
     return replacePhone.slice(0, 3) + '-****-' + replacePhone.slice(7, 12);
   }
 };
+
+export const convertDate = (data) => {
+  const date = new Date(data);
+  return new Intl.DateTimeFormat('kr').format(date);
+};

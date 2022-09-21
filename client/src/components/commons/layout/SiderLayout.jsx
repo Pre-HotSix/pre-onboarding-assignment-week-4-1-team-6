@@ -1,24 +1,24 @@
-import {
-  LogoutOutlined,
-  DashboardOutlined,
-  BankOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LogoutOutlined, BankOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import { Link } from 'react-router-dom';
 import { removeToken } from 'utils/Storage';
 import PropTypes from 'prop-types';
+import { getParameter } from 'utils/GetParams';
 
 const SIDE_MENU = [
   {
     id: 1,
-    name: '대시보드',
-    keyword: 'dashboard',
-    icon: <DashboardOutlined />,
+    name: '계좌 목록',
+    keyword: 'accounts?_page=1&_limit=10',
+    icon: <BankOutlined />,
   },
-  { id: 2, name: '계좌 목록', keyword: 'accounts', icon: <BankOutlined /> },
-  { id: 3, name: '사용자 목록', keyword: 'users', icon: <UserOutlined /> },
+  {
+    id: 2,
+    name: '사용자 목록',
+    keyword: 'users?_page=1&_limit=10',
+    icon: <UserOutlined />,
+  },
 ];
 
 SiderLayout.propTypes = {
@@ -31,7 +31,8 @@ const logout = () => {
 };
 
 export default function SiderLayout({ collapsed }) {
-  const nav = "2"
+  const paramData = getParameter();
+  const nav = paramData.pathname === '/accounts' ? '1' : '2';
 
   return (
     <Sider collapsed={collapsed}>

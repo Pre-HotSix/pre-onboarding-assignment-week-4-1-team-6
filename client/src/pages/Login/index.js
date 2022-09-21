@@ -1,18 +1,16 @@
 import { Button, Form, Input } from 'antd';
 import { login } from 'apis';
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { getToken, setToken } from 'utils/Storage';
 import { useMutation } from 'react-query';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { mutate, status } = useMutation(
+  const { mutate } = useMutation(
     ({ email, password }) => login(email, password),
     {
       onSuccess: ({ data }) => {
         setToken(data.accessToken);
-        navigate('/dashboard');
       },
       onError: (error) => {
         alert(error.response?.data);
@@ -74,6 +72,6 @@ export default function Login() {
       </Form.Item>
     </Form>
   ) : (
-    <Navigate replace to={'/dashboard'} />
+    <Navigate replace to={'/accounts?_page=1&_limit=10'} />
   );
 }
