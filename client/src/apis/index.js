@@ -1,13 +1,25 @@
 import axios from 'axios';
+import { getToken } from 'utils/Storage';
 
-const apiRoot = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  headers: { 'Content-Type': 'application/json' },
+const api = axios.create({
+  baseURL: 'http://localhost:4000',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getToken()}`,
+  },
 });
 
-const getAllCommentsApi = async () => {
-  const { data } = await apiRoot.get(``);
-  return data;
+export const login = async (email, password) => {
+  return await api.post('/signin', {
+    email: email,
+    password: password,
+  });
 };
 
-export { getAllCommentsApi };
+export const getUsers = async () => {
+  return await api.get(`/users`);
+};
+
+export const getUserInfo = async (params) => {
+  return await api.get(`/users${params}`);
+};
