@@ -1,28 +1,21 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { allUserState } from 'recoil/user';
-import { maskingName, maskingPhone, convertDate } from 'utils/ConvertData';
+import { Masking, Convert } from 'utils/ConvertData';
 import accountStatus from '../local_json/accountStatus.json';
 import brokers from '../local_json/brokers.json';
 
 export default function ACCOUNT_TABLE_COLUMNS() {
   const [allUser] = useRecoilState(allUserState);
 
-  const getOwner = (user_id) => {
-    const filterData = allUser.data.filter((data) => data.id === user_id);
-    return filterData[0].name;
-  };
-
-  const getKeyByValue = (object, value) => {
-    return Object.keys(object).find((key) => object[key] === value);
-  };
-
   return [
     {
       title: '고객명',
       dataIndex: 'user_id',
       render: (user_id) => (
-        <Link to={`/users?q=${getOwner(user_id)}`}>{getOwner(user_id)}</Link>
+        <Link to={`/users?q=${Convert.owner(allUser.data, user_id)}`}>
+          {Masking.text(Convert.owner(allUser.data, user_id))}
+        </Link>
       ),
     },
     {
@@ -33,12 +26,16 @@ export default function ACCOUNT_TABLE_COLUMNS() {
     {
       title: '계좌번호',
       dataIndex: 'number',
-      render: (text) => maskingName(text),
+      render: (number) => (
+        <Link to={`/accounts?q=${number}`}>{Masking.text(number)}</Link>
+      ),
     },
     {
       title: '계좌상태',
       dataIndex: 'status',
-      render: (status) => <span>{getKeyByValue(accountStatus, status)}</span>,
+      render: (status) => (
+        <span>{Convert.valueToKey(accountStatus, status)}</span>
+      ),
     },
     {
       title: '계좌명',
@@ -47,21 +44,7 @@ export default function ACCOUNT_TABLE_COLUMNS() {
     {
       title: '평가금액',
       dataIndex: ['assets', 'payments'],
-      render: (text, row) => {
-        if (+row.assets > +row.payments)
-          return (
-            <span className="text-red-600">
-              {(+row.assets).toLocaleString()}
-            </span>
-          );
-        if (+row.assets < +row.payments)
-          return (
-            <span className="text-blue-600">
-              {(+row.assets).toLocaleString()}
-            </span>
-          );
-        return <span>{(+row.assets).toLocaleString()}</span>;
-      },
+      render: (text, row) => Convert.assets(row.assets, row.payments),
     },
     {
       title: '입금금액',
@@ -76,7 +59,7 @@ export default function ACCOUNT_TABLE_COLUMNS() {
     {
       title: '계좌개설일',
       dataIndex: 'created_at',
-      render: (date) => convertDate(date),
+      render: (date) => Convert.date(date),
     },
   ];
 }

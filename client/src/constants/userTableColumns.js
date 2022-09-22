@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { allAccountState } from 'recoil/account';
 import { userSettingState } from 'recoil/userSetting';
-import { maskingName, maskingPhone, convertDate } from 'utils/ConvertData';
+import { Masking, Convert } from 'utils/ConvertData';
 
 export default function USER_TABLE_COLUMNS() {
   const [allAccount] = useRecoilState(allAccountState);
@@ -27,7 +27,7 @@ export default function USER_TABLE_COLUMNS() {
     {
       title: '이름',
       dataIndex: 'name',
-      render: (text) => <Link to={`?q=${text}`}>{maskingName(text)}</Link>,
+      render: (name) => <Link to={`?q=${name}`}>{Masking.text(name)}</Link>,
     },
     {
       title: '보유중인 계좌수',
@@ -46,17 +46,17 @@ export default function USER_TABLE_COLUMNS() {
     {
       title: '생년월일',
       dataIndex: 'birth_date',
-      render: (date) => convertDate(date),
+      render: (date) => Convert.date(date),
     },
     {
       title: '휴대폰번호',
       dataIndex: 'phone_number',
-      render: (phone) => maskingPhone(phone),
+      render: (phone) => Masking.phone(phone),
     },
     {
       title: '최근로그인',
       dataIndex: 'last_login',
-      render: (date) => convertDate(date),
+      render: (date) => Convert.date(date),
     },
     {
       title: '혜택수신',
@@ -71,7 +71,7 @@ export default function USER_TABLE_COLUMNS() {
     {
       title: '가입일',
       dataIndex: 'created_at',
-      render: (date) => convertDate(date),
+      render: (date) => Convert.date(date),
     },
   ];
 }

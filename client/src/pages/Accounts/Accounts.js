@@ -31,10 +31,9 @@ export default function Accounts({
     {
       queryKey: ['accounts', params],
       queryFn: () => getAccountData(params),
-      staleTime: 10000,
       onSuccess: ({ data }) => {
         if (searchName.length > 0) setTotal(data.length);
-        setAccounts([...data]);
+        setAccounts([...data.filter((account) => account.uuid !== undefined)]);
       },
       onError: (error) => {
         console.log('Accounts.js user data page => ', error);

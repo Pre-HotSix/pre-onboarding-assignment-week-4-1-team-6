@@ -48,7 +48,7 @@ export default function SiderLayout({ collapsed }) {
 
   return (
     <Sider collapsed={collapsed}>
-      <div className="h-10">로고</div>
+      <div className="h-10 text-white text-center align-middle">로고</div>
       <Menu theme="dark" items={items} defaultSelectedKeys={[pathname]} />
     </Sider>
   );

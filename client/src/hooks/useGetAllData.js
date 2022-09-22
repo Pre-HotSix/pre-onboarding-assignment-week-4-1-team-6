@@ -17,6 +17,7 @@ export default function useGetAllData() {
       queryKey: ['all_users'],
       queryFn: () => getUsers(),
       staleTime: 10000,
+      retry: 1,
       onSuccess: ({ data }) => {
         const filterData = data.filter((user) => user.name !== undefined);
         setAllUser({
@@ -35,10 +36,12 @@ export default function useGetAllData() {
       queryKey: ['all_accounts'],
       queryFn: () => getAccounts(),
       staleTime: 10000,
+      retry: 1,
       onSuccess: ({ data }) => {
+        const filterData = data.filter((account) => account.uuid !== undefined);
         setAllAccount({
-          total: data.length,
-          data: data,
+          total: filterData.length,
+          data: filterData,
         });
       },
       onError: (error) => {
