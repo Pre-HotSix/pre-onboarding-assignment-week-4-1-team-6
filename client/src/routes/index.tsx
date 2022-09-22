@@ -1,11 +1,14 @@
+import LayoutIndex from 'components/commons/layout';
+import { Home } from 'pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { MainPage } from '../pages';
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route element={<LayoutIndex />}>
+          <Route path="/" element={<Home />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
