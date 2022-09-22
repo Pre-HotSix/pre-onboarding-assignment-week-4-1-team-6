@@ -10,7 +10,8 @@ const queryClient = new QueryClient({
       console.log('query cache error => ', error);
       console.log('query cache query => ', query);
       if (query.state.data !== undefined) {
-        alert('에러', error.message);
+        console.log('src index.js error =====> ', error);
+        console.log('src index.js error message =====> ', error.message);
       }
     },
   }),

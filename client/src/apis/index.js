@@ -1,38 +1,4 @@
-import axios from 'axios';
-import { getToken } from 'utils/Storage';
-
-const instance = axios.create({
-  baseURL: 'http://localhost:4000',
-});
-
-instance.interceptors.request.use(
-  (config) => {
-    config.headers['Content-Type'] = 'application/json';
-    config.headers['Authorization'] = `Bearer ${getToken()}`;
-
-    return config;
-  },
-  (error) => {
-    console.log('api interceptors error', error);
-    return Promise.reject(error);
-  }
-);
-
-instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      originalRequest.headers['Authorization'] = `Bearer ${getToken()}`;
-      return axios(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
+import { instance } from './instance';
 
 export const login = async (email, password) => {
   return await instance.post('/signin', {
@@ -55,4 +21,8 @@ export const getAccounts = async () => {
 
 export const getAccountData = async (params) => {
   return await instance.get(`/accounts${params}`);
+};
+
+export const getUserSetting = async () => {
+  return await instance.get(`/userSetting`);
 };

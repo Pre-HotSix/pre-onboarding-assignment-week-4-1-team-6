@@ -1,44 +1,39 @@
-import { getAccountData, getAccounts, getUserData, getUsers } from 'apis';
+import { getAccountData } from 'apis';
 import { useQueries } from 'react-query';
-import { Pagination, Table } from 'antd';
+import { Pagination, Table, Input } from 'antd';
 import { useRecoilState } from 'recoil';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { accountsState } from 'recoil/accounts';
+import { accountsState, allAccountState } from 'recoil/account';
 import { ACCOUNT_TABLE_COLUMNS } from 'constants';
-import { removeToken } from 'utils/Storage';
 
 Accounts.propTypes = {
   params: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
+  limit: PropTypes.string.isRequired,
+  searchName: PropTypes.string.isRequired,
 };
 
-export default function Accounts({ params, pathname }) {
+export default function Accounts({
+  params,
+  pathname,
+  page,
+  limit,
+  searchName,
+}) {
   const navigate = useNavigate();
-  const search = new URLSearchParams(params);
-  const limit = search.get('_limit');
-  const page = search.get('_page');
   const [total, setTotal] = useState(0);
+  const [allAccount] = useRecoilState(allAccountState);
   const [accounts, setAccounts] = useRecoilState(accountsState);
-  const [getAllUser, getUsersPage] = useQueries([
-    {
-      queryKey: ['all_accounts'],
-      queryFn: () => getAccounts(),
-      onSuccess: ({ data }) => {
-        setTotal(data.length);
-      },
-      onError: (error) => {
-        console.log('Accounts.js => ', error);
-        alert('재로그인을 해주세요.');
-        removeToken();
-        navigate('/');
-      },
-    },
+  const [getUsersPage] = useQueries([
     {
       queryKey: ['accounts', params],
       queryFn: () => getAccountData(params),
+      staleTime: 10000,
       onSuccess: ({ data }) => {
+        if (searchName.length > 0) setTotal(data.length);
         setAccounts([...data]);
       },
       onError: (error) => {
@@ -48,22 +43,33 @@ export default function Accounts({ params, pathname }) {
   ]);
 
   const handlePagination = (clickPage) => {
-    navigate(`${pathname}?_page=${clickPage}&_limit=${limit}`);
+    navigate(`${pathname}?_page=${clickPage}&_limit=${limit}&q=${searchName}`);
+  };
+
+  const handleSearch = ({ target }) => {
+    const value = target.value;
+    navigate(`${pathname}?_page=${page}&_limit=${limit}&q=${value}`);
   };
 
   return (
     <>
+      <Input.Search
+        allowClear
+        placeholder="계좌번호를 입력해주세요."
+        className="mb-4 w-2/5"
+        onPressEnter={handleSearch}
+      />
       <Table
         rowKey={'uuid'}
-        columns={ACCOUNT_TABLE_COLUMNS}
+        columns={ACCOUNT_TABLE_COLUMNS()}
         dataSource={accounts}
         pagination={false}
       />
       <Pagination
         className="m-5 text-center"
-        defaultCurrent={page}
-        total={total}
-        defaultPageSize={limit}
+        current={+page}
+        total={searchName.length > 0 ? total : allAccount.total}
+        pageSize={+limit}
         onChange={handlePagination}
         responsive
         showSizeChanger={false}

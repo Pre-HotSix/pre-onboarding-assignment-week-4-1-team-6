@@ -2,9 +2,6 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Header } from 'antd/lib/layout/layout';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRecoilState } from 'recoil';
-import { userState } from 'recoil/user';
-import { usersState } from 'recoil/users';
 import { getParameter } from 'utils/GetParams';
 
 HeaderLayout.propTypes = {

@@ -3,9 +3,22 @@ import UserInfo from './UserInfo';
 import Users from './Users';
 
 export default function UserList() {
-  const {pathname,search} = getParameter();
+  const { pathname, search } = getParameter();
+  const params = new URLSearchParams(search);
 
-  if (search.includes('q=')) return <UserInfo params={search} />;
+  const page = params.get('_page');
+  const limit = params.get('_limit');
+  const searchName = params.get('q');
 
-  return <Users pathname={pathname} params={search} />;
+  if (!page) return <UserInfo params={search} />;
+
+  return (
+    <Users
+      pathname={pathname}
+      params={search}
+      page={page}
+      limit={limit}
+      searchName={searchName}
+    />
+  );
 }
