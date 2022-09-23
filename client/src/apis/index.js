@@ -6,8 +6,19 @@ const apiRoot = axios.create({
 });
 
 const getAllCommentsApi = async () => {
-  const { data } = await apiRoot.get(``);
+  const { data } = await apiRoot.get(`?${ORDER}&${SORT}`);
   return data;
 };
 
-export { getAllCommentsApi };
+const postCommentApi = async ({ profile_url, author, content, createdAt }) => {
+  const { data } = await apiRoot.post('', {
+    profile_url,
+    author,
+    content,
+    createdAt,
+  });
+
+  return data;
+};
+
+export { getAllCommentsApi, postCommentApi };

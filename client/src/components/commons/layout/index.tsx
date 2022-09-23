@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   // UserOutlined,
   AccountBookOutlined,
@@ -10,55 +10,61 @@ import { Layout } from 'antd';
 const { Header, Sider, Content, Footer } = Layout;
 import './style.css';
 import MenuText from '../../../sider.json';
-import AccountList from 'components/Admin/AccountList';
-import UserList from 'components/Admin/UserList';
+import { IItem } from './type';
+import { GlobalContext } from 'App';
 
 export default function LayoutIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const menuQuery = searchParams.getAll('menu');
-  const [currentTab, setCurrentTab] = useState(Number(menuQuery));
+  const { menuQuery, setMenuQuery } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setMenuQuery(searchParams.getAll('menu'));
+  }, [searchParams, setMenuQuery]);
+
+  useEffect(() => {
+    menuQuery;
+  }, [menuQuery]);
+
   const selectMenuHandler = (index: number) => {
-    setCurrentTab(index);
     setSearchParams({ menu: String(index) });
+    navigate(`/?menu=${index}`);
 
     if (index === 2) {
       localStorage.removeItem('accessToken');
       alert('로그아웃 되었습니다.');
-      navigate('/1');
+      navigate('/login');
     }
   };
 
   const items = [
     {
-      key: `${MenuText[1].id}`,
+      key: `${MenuText.sider[1].id}`,
       icon: <AccountBookOutlined />,
-      label: `${MenuText[1].name}`,
-      content: <AccountList />,
+      label: `${MenuText.sider[1].name}`,
     },
     {
-      key: `${MenuText[2].id}`,
+      key: `${MenuText.sider[2].id}`,
       icon: <UnorderedListOutlined />,
-      label: `${MenuText[2].name}`,
-      content: <UserList />,
+      label: `${MenuText.sider[2].name}`,
     },
     {
-      key: `${MenuText[3].id}`,
+      key: `${MenuText.sider[3].id}`,
       icon: <LogoutOutlined />,
-      label: `${MenuText[3].name}`,
+      label: `${MenuText.sider[3].name}`,
     },
   ];
 
   return (
     <Layout>
       <Sider trigger={null} collapsible>
-        {items.map((el, index) => (
+        {items.map((el: IItem, index: number) => (
           <li
-            key={index}
-            id="menuList"
-            className={currentTab === index ? 'focused' : 'submenu'}
+            key={el.key}
+            className={`menuList ${
+              Number(menuQuery) === index ? 'focused' : 'submenu'
+            }`}
             onClick={() => selectMenuHandler(index)}
           >
             {el.icon} <span className="pt-0.5 ml-1.5">{el.label}</span>
@@ -68,7 +74,7 @@ export default function LayoutIndex() {
       <Layout className="site-layout">
         <Header className="site-layout-background"></Header>
         <Content className="site-layout-background">
-          {items[currentTab].label}
+          <Outlet />
         </Content>
         <Footer>Copyright © December and Company Inc.</Footer>
       </Layout>

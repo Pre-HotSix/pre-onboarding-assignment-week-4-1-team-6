@@ -1,0 +1,4 @@
+tbody tr:hover td {
+  background-color: rgb(224 242 254);
+  cursor: default;
+}

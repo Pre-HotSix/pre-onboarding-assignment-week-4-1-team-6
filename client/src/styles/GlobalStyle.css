@@ -8,6 +8,7 @@ body,
 html {
   font-family: 'Noto Sans KR', sans-serif;
   box-sizing: border-box;
+  font-size: 0.875rem;
 }
 * {
   box-sizing: border-box;

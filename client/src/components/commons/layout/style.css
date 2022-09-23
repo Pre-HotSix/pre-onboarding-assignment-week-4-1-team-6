@@ -32,14 +32,14 @@ main.site-layout-background:nth-child(2) {
   margin: 24px 16px;
   padding: 12px 15px;
   min-height: 280px;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 181px);
+  overflow-y: auto;
 }
-
-#menuList {
-  margin-bottom: 10px;
-  padding: 0 20px;
-  height: 40px;
-  line-height: 40px;
+.ant-layout-sider-children {
+  padding-top: 5px !important;
+}
+.menuList {
+  padding: 12px 20px;
   display: flex;
   align-items: center;
 }
