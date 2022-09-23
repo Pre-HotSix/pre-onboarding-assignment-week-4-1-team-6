@@ -8,70 +8,85 @@ export default function USER_TABLE_COLUMNS() {
   const [allAccount] = useRecoilState(allAccountState);
   const [userSetting] = useRecoilState(userSettingState);
 
-  const getOwnAccountNumber = (id) => {
-    const filterData = allAccount.data.filter((data) => data.user_id === id);
-    return filterData.length;
-  };
-
-  const getAllowMarketingPush = (uuid) => {
-    const filterData = userSetting.filter((data) => data.uuid === uuid);
-    return filterData[0].allow_marketing_push ? '동의' : '미동의';
-  };
-
-  const getIsActive = (uuid) => {
-    const filterData = userSetting.filter((data) => data.uuid === uuid);
-    return filterData[0].is_active ? '활성화' : '비활성화';
-  };
-
   return [
     {
       title: '이름',
       dataIndex: 'name',
       render: (name) => <Link to={`?q=${name}`}>{Masking.text(name)}</Link>,
+      width: 120,
+      fixed: 'left',
+      align: 'center',
     },
     {
       title: '보유중인 계좌수',
       dataIndex: 'id',
-      render: (id) => <span>{getOwnAccountNumber(id)}</span>,
+      render: (id) => (
+        <span>{Convert.accountData(allAccount.data, id).length}</span>
+      ),
+      align: 'center',
     },
     {
       title: '이메일',
       dataIndex: 'email',
+      align: 'center',
     },
     {
       title: '성별',
       dataIndex: 'gender_origin',
-      render: (gender) => <span>{gender % 2 !== 0 ? '남성' : '여성'}</span>,
+      render: (gender) => <span>{Convert.gender(gender)}</span>,
+      align: 'center',
     },
     {
       title: '생년월일',
       dataIndex: 'birth_date',
-      render: (date) => Convert.date(date),
+      render: (date) => <span>{Convert.date(date)}</span>,
+      align: 'center',
     },
     {
       title: '휴대폰번호',
       dataIndex: 'phone_number',
-      render: (phone) => Masking.phone(phone),
+      render: (phone) => <span>{Masking.phone(phone)}</span>,
+      align: 'center',
     },
     {
       title: '최근로그인',
       dataIndex: 'last_login',
-      render: (date) => Convert.date(date),
+      render: (date) => <span>{Convert.date(date)}</span>,
+      align: 'center',
     },
     {
       title: '혜택수신',
       dataIndex: 'uuid',
-      render: (uuid) => <span>{getAllowMarketingPush(uuid)}</span>,
+      render: (uuid) => (
+        <span>{Convert.allowMarketingPush(userSetting, uuid)}</span>
+      ),
+      align: 'center',
     },
     {
       title: '활성화',
       dataIndex: 'uuid',
-      render: (uuid) => <span>{getIsActive(uuid)}</span>,
+      render: (uuid) => (
+        <span>{Convert.isActiveFromUserSetting(userSetting, uuid)}</span>
+      ),
+      align: 'center',
+      filters: [
+        {
+          text: '활성화',
+          value: '활성화',
+        },
+        {
+          text: '비활성화',
+          value: '비활성화',
+        },
+      ],
+      onFilter: (value, record) =>
+        Convert.isActiveFromUserSetting(userSetting, record.uuid) === value,
     },
     {
       title: '가입일',
       dataIndex: 'created_at',
-      render: (date) => Convert.date(date),
+      render: (date) => <span>{Convert.date(date)}</span>,
+      align: 'center',
     },
   ];
 }

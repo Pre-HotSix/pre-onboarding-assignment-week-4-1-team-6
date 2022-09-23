@@ -1,27 +1,34 @@
-import { getUserData } from 'apis';
+import { getAccountData } from 'apis';
+import DescriptAccount from 'components/DescriptionAccount';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { userState } from 'recoil/user';
+import { accountsState } from 'recoil/account';
+import { allUserState } from 'recoil/user';
 
-UserInfo.propTypes = {
+AccountInfo.propTypes = {
   params: PropTypes.string.isRequired,
 };
-export default function UserInfo({ params }) {
-  const [user, setUser] = useRecoilState(userState);
+
+export default function AccountInfo({ params }) {
+  const [account, setAccount] = useRecoilState(accountsState);
+  const [allUser] = useRecoilState(allUserState);
   const { isLoading, isError, error } = useQuery(
-    ['users', params],
-    () => getUserData(params),
+    ['accounts', params],
+    () => getAccountData(params),
     {
       refetchOnWindowFocus: false,
       retry: 0,
       onSuccess: ({ data }) => {
-        setUser({ ...data[0] });
+        setAccount([ ...data ]);
       },
       onError: (e) => {
         console.log(e.message);
       },
     }
   );
-  return <div>hi</div>;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>{error}</div>;
+  return <DescriptAccount account={account[0]} allUser={allUser} />;
 }

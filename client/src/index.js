@@ -9,10 +9,6 @@ const queryClient = new QueryClient({
     onError: (error, query) => {
       console.log('query cache error => ', error);
       console.log('query cache query => ', query);
-      if (query.state.data !== undefined) {
-        console.log('src index.js error =====> ', error);
-        console.log('src index.js error message =====> ', error.message);
-      }
     },
   }),
 });

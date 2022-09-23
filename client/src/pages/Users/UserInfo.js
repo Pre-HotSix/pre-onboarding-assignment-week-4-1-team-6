@@ -1,27 +1,54 @@
 import { getUserData } from 'apis';
+import DescriptAccount from 'components/DescriptionAccount';
+import DescriptUser from 'components/DescriptionUser';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { userState } from 'recoil/user';
+import { allAccountState } from 'recoil/account';
+import { allUserState, usersState } from 'recoil/user';
+import { userSettingState } from 'recoil/userSetting';
+import { Convert } from 'utils/ConvertData';
 
 UserInfo.propTypes = {
   params: PropTypes.string.isRequired,
 };
+
 export default function UserInfo({ params }) {
-  const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(usersState);
+  const [allUser] = useRecoilState(allUserState);
+  const [allAccount] = useRecoilState(allAccountState);
+  const [userSetting] = useRecoilState(userSettingState);
+  const { filterData } = Convert.accountData(allAccount.data, user[0]?.id);
   const { isLoading, isError, error } = useQuery(
     ['users', params],
     () => getUserData(params),
     {
       refetchOnWindowFocus: false,
-      retry: 0,
+      retry: 1,
       onSuccess: ({ data }) => {
-        setUser({ ...data[0] });
+        setUser([...data]);
       },
       onError: (e) => {
         console.log(e.message);
       },
     }
   );
-  return <div>hi</div>;
+
+  if (isLoading) return <div>loading..</div>;
+
+  if (isError) return <div>{error}</div>;
+  
+  return (
+    <>
+      <DescriptUser
+        user={user[0]}
+        allAccount={allAccount}
+        userSetting={userSetting}
+      />
+
+      {filterData.map((data, i) => (
+        <DescriptAccount key={i} account={data} allUser={allUser} />
+      ))}
+    </>
+  );
 }

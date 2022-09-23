@@ -24,6 +24,7 @@ export default function Login() {
 
   return !getToken() ? (
     <Form
+      className='mt-24'
       name="basic"
       labelCol={{
         span: 8,

@@ -63,6 +63,8 @@ export default function Accounts({
         columns={ACCOUNT_TABLE_COLUMNS()}
         dataSource={accounts}
         pagination={false}
+        scroll={{ x: 1300 }}
+        bordered
       />
       <Pagination
         className="m-5 text-center"
