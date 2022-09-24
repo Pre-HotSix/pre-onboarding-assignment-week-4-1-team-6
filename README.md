@@ -42,20 +42,19 @@ https://user-images.githubusercontent.com/103626175/192110285-61a104c9-2aca-42e2
 
 레포지토리를 `clone` 합니다
 ```markdown
-$ git clone https://github.com/Pre-HotSix/pre-onboarding-assignment-week-3-2-team-6
+$ git clone https://github.com/Pre-HotSix/pre-onboarding-assignment-week-4-1-team-6
 ```
 dependencies를 설치합니다
 ```markdown
 $ npm install
 ```
-env를 설정합니다
+server 더미 데이터를 생성합니다.
 ```markdown
-$ 내려받은 프로젝트의 최상위 폴더 안에 .env 파일을 생성합니다.
-REACT_APP_API_URL=http://localhost:4000/comments
+$ npm run gen
 ```
-api 서버를 실행합니다
+server 레포지토리에서 api 서버를 실행합니다
 ```markdown
-$ npm run api
+$ npm start
 ```
 프로젝트를 실행합니다
 ```markdown
