@@ -67,7 +67,7 @@ export default function Login() {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="default" htmlType="submit">
           로그인
         </Button>
       </Form.Item>

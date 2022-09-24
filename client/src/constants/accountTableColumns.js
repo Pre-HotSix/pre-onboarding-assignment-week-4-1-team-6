@@ -1,3 +1,4 @@
+import { useGetAllData } from 'hooks';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { allUserState } from 'recoil/user';
@@ -7,7 +8,9 @@ import brokers from '../local_json/brokers';
 const BROKERS = Object.values(brokers);
 export default function ACCOUNT_TABLE_COLUMNS() {
   const [allUser] = useRecoilState(allUserState);
+  useGetAllData();
 
+  if (allUser.data === []) return [];
   return [
     {
       title: '계좌번호',

@@ -26,3 +26,21 @@ export const getAccountData = async (params) => {
 export const getUserSetting = async () => {
   return await instance.get(`/userSetting`);
 };
+
+export const editUserName = async (id, name) => {
+  return await instance.patch(`/users/${id}`, {
+    name: name,
+  });
+};
+
+export const deleteUser = async (id) => {
+  return await instance.delete(`/users/${id}`);
+};
+
+export const deleteAccount = async (id) => {
+  return await instance.delete(`/accounts/${id}`);
+};
+
+export const createUsers = async (data) => {
+  return await instance.post(`/users`, data);
+};

@@ -50,6 +50,7 @@ export default function Accounts({
     navigate(`${pathname}?_page=${page}&_limit=${limit}&q=${value}`);
   };
 
+;
   return (
     <>
       <Input.Search
