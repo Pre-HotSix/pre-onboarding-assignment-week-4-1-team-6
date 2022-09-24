@@ -5,7 +5,7 @@ import pages from './page';
 import ProtectedRoute from './protectedRoute';
 const RootRoute = () => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route element={<LayoutContainer />}>

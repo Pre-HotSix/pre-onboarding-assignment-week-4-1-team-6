@@ -12,7 +12,7 @@ export const getUsers = async () => {
 };
 
 export const getUserData = async (params) => {
-  return await instance.get(`/users${params}`);
+  return await instance.get(`/users/${params}`);
 };
 
 export const getAccounts = async () => {
@@ -35,10 +35,6 @@ export const editUserName = async (id, name) => {
 
 export const deleteUser = async (id) => {
   return await instance.delete(`/users/${id}`);
-};
-
-export const deleteAccount = async (id) => {
-  return await instance.delete(`/accounts/${id}`);
 };
 
 export const createUsers = async (data) => {

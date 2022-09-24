@@ -19,8 +19,8 @@ export default function LayoutContainer() {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapse = () => setCollapsed((prev) => !prev);
 
-  return getToken() ? (
-    <Layout className="h-full flex flex-row">
+  return (
+    <Layout className="min-h-screen flex flex-row">
       <SiderLayout collapsed={collapsed} />
       <Layout>
         <HeaderLayout collapsed={collapsed} handleToggle={toggleCollapse} />
@@ -39,7 +39,5 @@ export default function LayoutContainer() {
         <FooterLayout />
       </Layout>
     </Layout>
-  ) : (
-    <Navigate replace to={'/'} />
   );
 }

@@ -3,6 +3,7 @@ import DescriptAccount from 'components/DescriptionAccount';
 import DescriptUser from 'components/DescriptionUser';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { allAccountState } from 'recoil/account';
 import { allUserState, usersState } from 'recoil/user';
@@ -19,14 +20,16 @@ export default function UserInfo({ params }) {
   const [allAccount] = useRecoilState(allAccountState);
   const [userSetting] = useRecoilState(userSettingState);
   const { filterData } = Convert.accountData(allAccount.data, user[0]?.id);
+  const param = useParams();
+
   const { isLoading, isError, error } = useQuery(
     ['users', params],
-    () => getUserData(params),
+    () => getUserData(param.id),
     {
       refetchOnWindowFocus: false,
       retry: 1,
       onSuccess: ({ data }) => {
-        setUser([...data]);
+        setUser([{ ...data }]);
       },
       onError: (e) => {
         console.log(e.message);

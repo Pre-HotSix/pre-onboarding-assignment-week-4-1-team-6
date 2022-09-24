@@ -89,7 +89,7 @@ export const Convert = {
       return number.replace(/(\d{2})(\d{3})(\d{4})(\d{3})/, '$1-$2-$3-$4');
     }
     if (
-      (broker_id === broker_id) === 240 ||
+      broker_id === 240 ||
       broker_id === 247 ||
       broker_id === 263 ||
       broker_id === 280 ||
@@ -106,7 +106,7 @@ export const Convert = {
     if (broker_id === 264) {
       return number.replace(/(\d{2})(\d{4})(\d{2})(\d{4})/, '$1-$2-$3-$4');
     }
-    if (broker_id === 264) {
+    if (broker_id === 265) {
       return number.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, '$1-$2-$3-$4');
     }
     if (
