@@ -20,7 +20,7 @@ export default function AccountInfo({ params }) {
       refetchOnWindowFocus: false,
       retry: 0,
       onSuccess: ({ data }) => {
-        setAccount([ ...data ]);
+        setAccount([...data]);
       },
       onError: (e) => {
         console.log(e.message);

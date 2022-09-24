@@ -50,8 +50,9 @@ export default function Accounts({
     navigate(`${pathname}?_page=${page}&_limit=${limit}&q=${value}`);
   };
 
-;
-  return (
+  return allAccount.data === [] ? (
+    <div>Loading...</div>
+  ) : (
     <>
       <Input.Search
         allowClear

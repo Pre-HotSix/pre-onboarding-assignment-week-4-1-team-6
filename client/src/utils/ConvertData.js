@@ -3,7 +3,7 @@ import brokers from '../local_json/brokers.json';
 
 export const Masking = {
   text: (text) => {
-    if (text.length > 2) {
+    if (text?.length > 2) {
       let originText = text.split('');
       originText.forEach(function (text, i) {
         if (i === 0 || i === originText.length - 1) return;
@@ -33,7 +33,7 @@ export const Convert = {
   },
   owner: (userData, user_id) => {
     const filterData = userData.filter((data) => data.id === user_id);
-    return filterData[0].name;
+    return filterData[0]?.name;
   },
   valueToKey: (value) => {
     return Object.keys(accountStatus).find(
@@ -62,11 +62,15 @@ export const Convert = {
   },
   allowMarketingPush: (data, uuid) => {
     const filterData = data.filter((setting) => setting.uuid === uuid);
-    return filterData[0].allow_marketing_push ? '동의' : '미동의';
+    return filterData[0]?.allow_marketing_push ? '동의' : '미동의';
   },
   isActiveFromUserSetting: (data, uuid) => {
     const filterData = data.filter((setting) => setting.uuid === uuid);
-    return filterData[0].is_active ? '활성화' : '비활성화';
+    return filterData[0]?.is_active ? '활성화' : '비활성화';
+  },
+  isStaffFromUserSetting: (data, uuid) => {
+    const filterData = data.filter((setting) => setting.uuid === uuid);
+    return filterData[0]?.is_staff ? '유' : '무';
   },
   address: (first, second) => {
     return first + ' ' + second;
