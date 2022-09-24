@@ -1,10 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      console.log('query cache error => ', error);
+      console.log('query cache query => ', query);
+    },
+  }),
+});
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
     <App />
-  </React.StrictMode>
+    <ReactQueryDevtools />
+  </QueryClientProvider>
+  // </React.StrictMode>
 );

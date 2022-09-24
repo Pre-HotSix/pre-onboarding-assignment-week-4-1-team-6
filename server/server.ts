@@ -1,6 +1,7 @@
 const jsonServer = require('json-server')
 
 const auth = require('json-server-auth')
+const cors = require('cors')
 
 const app = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -12,6 +13,14 @@ const rules = auth.rewriter({
   accounts: 660,
 })
 
+app.use(
+  cors({
+    origin: '*',
+    preflightContinue: false,
+    methods: 'GET,POST,DELETE,PATCH',
+  }),
+)
+app.options('*', cors())
 app.use(rules)
 app.use(auth)
 app.use(router)
