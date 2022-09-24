@@ -27,9 +27,15 @@ export const Masking = {
 };
 
 export const Convert = {
-  date: (data) => {
-    const date = new Date(data);
-    return new Intl.DateTimeFormat('kr').format(date);
+  date: (date) => {
+    if (date === undefined) return null;
+    const localDate = new Date(date);
+    const year = localDate.getFullYear();
+    const month = localDate.getMonth() + 1;
+    const day = localDate.getDate();
+    const full = `${year}-${month < 10 ? ('0' + month): month}-${day < 10 ? ('0' + day): day}`;
+  
+    return full;
   },
   owner: (userData, user_id) => {
     const filterData = userData.filter((data) => data.id === user_id);

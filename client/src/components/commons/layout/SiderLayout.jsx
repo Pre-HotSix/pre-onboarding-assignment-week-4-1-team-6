@@ -58,7 +58,7 @@ export default function SiderLayout({ collapsed }) {
         className="p-0"
         theme="dark"
         items={items}
-        defaultSelectedKeys={['/' + split_pathname[1]]}
+        selectedKeys={['/' + split_pathname[1]]}
       />
     </Sider>
   );

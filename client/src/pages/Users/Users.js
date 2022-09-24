@@ -2,18 +2,16 @@ import {
   getUserData,
   deleteUser,
   editUserName,
-  deleteAccount,
   createUsers,
 } from 'apis';
 import { useMutation, useQueries } from 'react-query';
-import { Pagination, Table, Input, Space, Button } from 'antd';
+import { Pagination, Table, Input, Button } from 'antd';
 import { useRecoilState } from 'recoil';
 import { allUserState, usersState } from 'recoil/user';
 import { USER_TABLE_COLUMNS } from 'constants';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { allAccountState } from 'recoil/account';
 
 Users.propTypes = {
   params: PropTypes.string.isRequired,
@@ -27,7 +25,6 @@ export default function Users({ params, pathname, page, limit, searchName }) {
   const navigate = useNavigate();
   const [total, setTotal] = useState(0);
   const [allUser] = useRecoilState(allUserState);
-  const [allAccount] = useRecoilState(allAccountState);
   const [users, setUsers] = useRecoilState(usersState);
   const [createMode, setCreateMode] = useState(false);
   const { mutate: createMutate } = useMutation(
@@ -69,7 +66,7 @@ export default function Users({ params, pathname, page, limit, searchName }) {
         setUsers([...data]);
       },
       onError: (error) => {
-        console.log('Users.js user data page => ', error);
+        throw ('Users.js user data page => ', error);
       },
     },
   ]);

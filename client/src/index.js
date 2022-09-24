@@ -6,18 +6,17 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: (error, query) => {
-      console.log('query cache error => ', error);
-      console.log('query cache query => ', query);
+    onError: (error) => {
+      throw ('query cache error => ', error);
     },
   }),
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  <QueryClientProvider client={queryClient}>
-    <App />
-    <ReactQueryDevtools />
-  </QueryClientProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </React.StrictMode>
 );

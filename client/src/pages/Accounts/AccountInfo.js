@@ -23,7 +23,7 @@ export default function AccountInfo({ params }) {
         setAccount([...data]);
       },
       onError: (e) => {
-        console.log(e.message);
+        throw e.message
       },
     }
   );
