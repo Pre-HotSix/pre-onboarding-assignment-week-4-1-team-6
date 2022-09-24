@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from 'utils/Storage';
 
 export const instance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: '',
 });
 
 instance.interceptors.request.use(
