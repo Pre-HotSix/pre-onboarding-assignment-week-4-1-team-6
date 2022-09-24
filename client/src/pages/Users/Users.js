@@ -29,6 +29,7 @@ export default function Users({ params, pathname, page, limit, searchName }) {
   const [allUser] = useRecoilState(allUserState);
   const [allAccount] = useRecoilState(allAccountState);
   const [users, setUsers] = useRecoilState(usersState);
+  const [createMode, setCreateMode] = useState(false);
   const { mutate: createMutate } = useMutation(
     ({ data }) => createUsers(data),
     {
@@ -102,25 +103,18 @@ export default function Users({ params, pathname, page, limit, searchName }) {
     editMutate({ id, name });
   };
 
-  const handleCreate = () => {
-    const dummy_data = Math.random().toString(36).substr(2, 7);
+  const createNewUser = (e) => {
+    e.preventDefault();
+    console.log(e);
     const data = {
-      uuid: '899979f6-4539-41ed-aa15-99088367f985',
-      photo:
-        'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/968.jpg',
-      name: dummy_data,
-      email: dummy_data + '@test.com',
-      password: '1234',
-      age: 29,
-      gender_origin: 4,
-      birth_date: '1957-06-28T16:44:00.871Z',
-      phone_number: '010-0000-0000',
-      address: 'Somalia 용산시',
-      detail_address: '94895 구로읍 Suite 381',
-      last_login: '2022-02-23T20:27:47.664Z',
-      created_at: '2021-02-01T03:34:01.810Z',
-      updated_at: '2020-10-22T11:52:37.629Z',
+      name: e.target[0].value,
+      email: e.target[1].value,
+      password: e.target[2].value,
+      phone_number: e.target[3].value,
+      last_login: new Date().toISOString(),
+      created_at: new Date().toISOString(),
     };
+    setCreateMode(false);
     createMutate({ data });
   };
 
@@ -132,9 +126,38 @@ export default function Users({ params, pathname, page, limit, searchName }) {
         className="mb-4 w-2/5"
         onPressEnter={handleSearch}
       />
-      <Button className="ml-5" onClick={handleCreate}>
-        테스트 계정 만들기
+      <Button className="ml-5" onClick={() => setCreateMode(true)}>
+        신규 사용자 추가
       </Button>
+      {createMode ? (
+        <form onSubmit={createNewUser} className="mb-4">
+          <input
+            className="border text-xs p-2 mr-4"
+            type={'text'}
+            placeholder="이름"
+          ></input>
+          <input
+            className="border text-xs p-2 mr-4"
+            type={'text'}
+            placeholder="이메일"
+          ></input>
+          <input
+            type={'text'}
+            placeholder="비밀번호"
+            className="border text-xs p-2 mr-4"
+          ></input>
+          <input
+            type={'text'}
+            placeholder="휴대폰번호"
+            className="border text-xs p-2 mr-4"
+          ></input>
+          <button className="ml-2 rounded p-2 hover:bg-sky-200 border">
+            제출
+          </button>
+        </form>
+      ) : (
+        ''
+      )}
       <Table
         rowKey={'id'}
         columns={USER_TABLE_COLUMNS(handleEdit, handleDelete)}

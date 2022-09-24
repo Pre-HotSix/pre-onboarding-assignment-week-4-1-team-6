@@ -37,7 +37,7 @@ export default function UserInfo({ params }) {
   if (isLoading) return <div>loading..</div>;
 
   if (isError) return <div>{error}</div>;
-  
+
   return (
     <>
       <DescriptUser

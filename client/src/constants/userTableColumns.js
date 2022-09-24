@@ -71,6 +71,26 @@ export default function USER_TABLE_COLUMNS(handleEdit, handleDelete) {
       align: 'center',
     },
     {
+      title: '임직원 계좌 여부',
+      dataIndex: 'uuid',
+      render: (uuid) => (
+        <span>{Convert.isStaffFromUserSetting(userSetting, uuid)}</span>
+      ),
+      align: 'center',
+      // filters: [
+      //   {
+      //     text: '유',
+      //     value: '유',
+      //   },
+      //   {
+      //     text: '무',
+      //     value: '무',
+      //   },
+      // ],
+      // onFilter: (value, record) =>
+      //   Convert.isStaffFromUserSetting(userSetting, record.uuid) === value,
+    },
+    {
       title: '활성화',
       dataIndex: 'uuid',
       render: (uuid) => (
@@ -96,45 +116,45 @@ export default function USER_TABLE_COLUMNS(handleEdit, handleDelete) {
       render: (date) => <span>{Convert.date(date)}</span>,
       align: 'center',
     },
-    {
-      title: '수정/삭제',
-      dataIndex: 'id',
-      render: (id) => (
-        <div className="flex flex-row place-content-center space-x-5">
-          <Popconfirm
-            title={
-              <Input
-                autoFocus
-                placeholder="닉네임을 입력하세요."
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            }
-            icon={<EditOutlined width={12} className="mt-1" />}
-            cancelText="취소"
-            okText="수정"
-            okType="default"
-            onCancel={() => setUserName('')}
-            onConfirm={() => {
-              setUserName('');
-              handleEdit(id, userName);
-            }}
-          >
-            <EditOutlined />
-          </Popconfirm>
-          <Popconfirm
-            title="삭제 하시겠습니까?"
-            cancelText="취소"
-            okText="삭제"
-            okType="danger"
-            onConfirm={() => handleDelete(id)}
-          >
-            <DeleteOutlined />
-          </Popconfirm>
-        </div>
-      ),
-      fixed: 'right',
-      align: 'center',
-    },
+    // {
+    //   title: '수정/삭제',
+    //   dataIndex: 'id',
+    //   render: (id) => (
+    //     <div className="flex flex-row place-content-center space-x-5">
+    //       <Popconfirm
+    //         title={
+    //           <Input
+    //             autoFocus
+    //             placeholder="닉네임을 입력하세요."
+    //             value={userName}
+    //             onChange={(e) => setUserName(e.target.value)}
+    //           />
+    //         }
+    //         icon={<EditOutlined width={12} className="mt-1" />}
+    //         cancelText="취소"
+    //         okText="수정"
+    //         okType="default"
+    //         onCancel={() => setUserName('')}
+    //         onConfirm={() => {
+    //           setUserName('');
+    //           handleEdit(id, userName);
+    //         }}
+    //       >
+    //         <EditOutlined />
+    //       </Popconfirm>
+    //       <Popconfirm
+    //         title="삭제 하시겠습니까?"
+    //         cancelText="취소"
+    //         okText="삭제"
+    //         okType="danger"
+    //         onConfirm={() => handleDelete(id)}
+    //       >
+    //         <DeleteOutlined />
+    //       </Popconfirm>
+    //     </div>
+    //   ),
+    //   fixed: 'right',
+    //   align: 'center',
+    // },
   ];
 }
