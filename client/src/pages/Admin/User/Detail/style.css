@@ -1,0 +1,8 @@
+tbody tr:hover td {
+  background-color: none !important;
+  cursor: default;
+}
+
+td:hover {
+  cursor: default;
+}

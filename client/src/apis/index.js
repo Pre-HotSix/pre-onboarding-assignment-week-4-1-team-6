@@ -5,9 +5,13 @@ const apiRoot = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-const getAllCommentsApi = async () => {
-  const { data } = await apiRoot.get(``);
+const LoginApi = async ({ email, password }) => {
+  const { data } = await apiRoot.post('/login', {
+    email,
+    password,
+  });
+
   return data;
 };
 
-export { getAllCommentsApi };
+export { LoginApi };
