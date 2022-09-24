@@ -25,7 +25,6 @@ function AccountList() {
     const query = BaseUrlAccounts(value) + plusUrl
     dispatch(getAccountsThunk(token, query));
     dispatch(getAccountsPageThunk(token, `${location.pathname}${location.search}`));
-    console.log(location);
   }, [location]);
 
   const pagination = (page) => {
@@ -40,7 +39,6 @@ function AccountList() {
     const value = (location.state && location.state.text) ? location.state.text: '';
     const plusUrl = (location.state && location.state.plus) ? location.state.plus: '';
     const queryString = pageUrlAccounts(page, value);
-    console.log(location.state);
     navigate(queryString + plusUrl,  {
       state: {
         text: value,
@@ -119,7 +117,7 @@ function AccountList() {
         <tr key={index} className="border-b-2 border-solid border-gray-100">
           <th className="cursor-pointer" onClick={() => toUser(account.user_id)}>{findUser.name}</th>
           <td>{brokers[account.broker_id]}</td>
-          <td className="cursor-pointer" onClick={() => toDetail(account.number, userName)}>
+          <td className="cursor-pointer" onClick={() => toDetail(account.number, findUser.name)}>
             {hideNumber(account.number)}
           </td>
           <td>{settingStatus(account.status)}</td>

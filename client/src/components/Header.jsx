@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { basicButton, activeButton } from 'styles/theme';
 
 function Header({ cate, chooseUrl }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const worker = sessionStorage.getItem('worker');
   const headerTitle = (category) => {
     return `${category} / ${worker}`
@@ -11,9 +12,12 @@ function Header({ cate, chooseUrl }) {
   const search = (e) => {
     e.preventDefault();
     const value = e.target.search.value;
-    navigate(chooseUrl(1, value), {
+    const plusUrl = (location.state && location.state.plus) ? location.state.plus: '';
+    const queryString = chooseUrl(1, value);
+    navigate(queryString + plusUrl,  {
       state: {
-        text: value
+        text: value,
+        plus: plusUrl
       }
     });
   };

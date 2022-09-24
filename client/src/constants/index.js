@@ -14,15 +14,6 @@ export const BaseUrlAccounts = (search) => `/accounts?_order=${ORDER}&_sort=${SO
 export const PAGE_URL_ACCOUNTS = `/accounts?_order=${ORDER}&_sort=${SORT}&_page=${PAGE}&_limit=${LIMIT}&q=`;
 export const pageUrlAccounts = (page, search) => `/accounts?_order=${ORDER}&_sort=${SORT}&_page=${page}&_limit=${LIMIT}&q=${search}`;
 
-export const acStatusUrl = (search, status) => `/accounts?_order=${ORDER}&_sort=${SORT}&q=${search}&status=${status}`;
-export const acIsActiveUrl = (search, isActive) => `/accounts?_order=${ORDER}&_sort=${SORT}&q=${search}&is_active=${isActive}`;
-export const acBorkerIdUrl = (search, brokerId) => `/accounts?_order=${ORDER}&_sort=${SORT}&q=${search}&broker_id=${brokerId}`;
-
-// export const acPaStatusUrl = (page, search, status) => `/accounts?_order=${ORDER}&_sort=${SORT}&_page=${page}&_limit=${LIMIT}&q=${search}&status=${status}`;
-// export const acPaIsActiveUrl = (page, search, isActive) => `/accounts?_order=${ORDER}&_sort=${SORT}&_page=${page}&_limit=${LIMIT}&q=${search}&is_active=${isActive}`;
-// export const acPaBorkerIdUrl = (page, search, brokerId) => `/accounts?_order=${ORDER}&_sort=${SORT}&_page=${page}&_limit=${LIMIT}&q=${search}&broker_id=${brokerId}`;
-
-
 export const localTime = (date) => {
   if (date === undefined) return null
   const localDate = new Date(date);
