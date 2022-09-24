@@ -6,3 +6,4 @@ export { default as NameMasking } from './utils/NameMasking';
 export { default as PhoneNumber } from './utils/PhoneNumber';
 export { default as GetAccountFormat } from './utils/GetAccountFormat';
 export { default as storage } from './utils/Storage';
+export { default as Filter } from './utils/Filter';

@@ -6,14 +6,13 @@ import { IAccount } from 'types/Account.type';
 import Account from '../../../../db.json';
 import { IAccountList } from './type';
 import { SearchBar } from 'components';
+import { Filter } from 'commons';
 
 export default function AccountList({
   account,
   onClickMoveToUserDetail,
   onClickMoveToAccountDetail,
 }: IAccountList) {
-  const [accountData, setAccountData] = useState({});
-  const [Toggle, setToggle] = useState(false);
   const [keyword, setKeyword] = useState<string>();
   const [searchList, setSearchList] = useState<boolean>(false);
   // const [clickPage, setClickPage] = useState(1);
@@ -27,53 +26,7 @@ export default function AccountList({
     getDebounce(event.target.value);
   };
 
-  const onChangeFilter = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    switch (e.target.value) {
-      case 'is_active':
-        setToggle((prev) => !prev);
-        if (Toggle) {
-          setAccountData(
-            account.sort(function (a, b) {
-              return a.is_active - b.is_active;
-            })
-          );
-        } else {
-          setAccountData(
-            account.sort(function (a, b) {
-              return b.is_active - a.is_active;
-            })
-          );
-        }
-        break;
-      case 'broker_id':
-        if (value) {
-          setAccountData(
-            account
-              .filter((el) => {
-                return el.broker_id === id;
-              })
-              .sort(function (a, b) {
-                return a.broker_id - b.broker_id;
-              })
-          );
-        } else {
-          setAccountData(
-            account
-              .filter((el) => {
-                return el.broker_id === id;
-              })
-              .sort(function (a, b) {
-                return b.broker_id - a.broker_id;
-              })
-          );
-        }
-        break;
-      default:
-        return setAccountData(account);
-    }
-    // }
-  };
+  Filter(account);
 
   return (
     <>
