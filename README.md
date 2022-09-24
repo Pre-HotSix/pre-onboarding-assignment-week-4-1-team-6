@@ -7,9 +7,9 @@
 <br/>
 
 ## 구현 영상
-https://discord.com/channels/1014087531668701214/1014087531668701217/1023279538022666250
+https://user-images.githubusercontent.com/103626175/192110221-8c4affa4-aa9d-40c7-9804-c6eeeaf414e8.mp4
 <br/>
-https://discord.com/channels/1014087531668701214/1014087531668701217/1023279614765834312
+https://user-images.githubusercontent.com/103626175/192110285-61a104c9-2aca-42e2-b73b-76bd2a6647ed.mp4
 
 <br/>
 
