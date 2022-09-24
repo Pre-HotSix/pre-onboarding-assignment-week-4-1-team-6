@@ -13,11 +13,11 @@ https://user-images.githubusercontent.com/103626175/192113638-4cff6e87-1a59-4aeb
 
 계좌 관련
 
-https://user-images.githubusercontent.com/103626175/192113662-29b8176e-6794-463f-bd2b-c42887de253c.mp4
+https://user-images.githubusercontent.com/103626175/192114152-28554bb8-0a3a-4d67-b074-300debe4e62e.mp4
 
 사용자 관련
 
-https://user-images.githubusercontent.com/103626175/192113698-66c7283c-32c7-4112-8b16-dfb1036beabf.mp4
+https://user-images.githubusercontent.com/103626175/192114167-6e8fe968-0131-49a5-bc33-777d1ade962b.mp4
 
 <br/>
 
