@@ -1,10 +1,9 @@
 import { Layout, Breadcrumb } from 'antd';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import FooterLayout from './FooterLayout';
 import HeaderLayout from './HeaderLayout';
 import SiderLayout from './SiderLayout';
-import { getToken } from 'utils/Storage';
 import { useRecoilState } from 'recoil';
 import { allUserState } from 'recoil/user';
 import { allAccountState } from 'recoil/account';

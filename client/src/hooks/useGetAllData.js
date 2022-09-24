@@ -12,7 +12,7 @@ export default function useGetAllData() {
   const setAllUser = useSetRecoilState(allUserState);
   const setAllAccount = useSetRecoilState(allAccountState);
   const setUserSetting = useSetRecoilState(userSettingState);
-  const [getAllUser] = useQueries([
+  useQueries([
     {
       queryKey: ['all_users'],
       queryFn: () => getUsers(),
@@ -24,11 +24,12 @@ export default function useGetAllData() {
           data: filterData,
         });
       },
-      onError: (error) => {
-        console.log('From Get Users => ', error);
-        alert('재로그인을 해주세요.');
-        removeToken();
-        navigate('/');
+      onError: (e) => {
+        if (e.response.status === 401) {
+          alert('재로그인을 해주세요.');
+          removeToken();
+          navigate('/');
+        };
       },
     },
 
@@ -44,7 +45,7 @@ export default function useGetAllData() {
         });
       },
       onError: (error) => {
-        console.log('From Get Accounts => ', error);
+        throw ('From Get Accounts => ', error);
       },
     },
     {
@@ -55,7 +56,7 @@ export default function useGetAllData() {
         setUserSetting([...data]);
       },
       onError: (error) => {
-        console.log('From Get UserSetting => ', error);
+        throw ('From Get UserSetting => ', error);
       },
     },
   ]);

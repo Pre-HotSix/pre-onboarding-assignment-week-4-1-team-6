@@ -27,7 +27,7 @@ export default function Accounts({
   const [total, setTotal] = useState(0);
   const [allAccount] = useRecoilState(allAccountState);
   const [accounts, setAccounts] = useRecoilState(accountsState);
-  const [getUsersPage] = useQueries([
+  useQueries([
     {
       queryKey: ['accounts', params],
       queryFn: () => getAccountData(`${params}`),
@@ -36,20 +36,30 @@ export default function Accounts({
         setAccounts([...data.filter((account) => account.uuid !== undefined)]);
       },
       onError: (error) => {
-        console.log('Accounts.js user data page => ', error);
+        throw ('Accounts.js user data page => ', error);
       },
     },
   ]);
 
   const handlePagination = (clickPage) => {
-    navigate(`${pathname}?_page=${clickPage}&_limit=${limit}&q=${searchName}`);
+    navigate(
+      `${pathname}?_order=desc&_sort=id&_page=${clickPage}&_limit=${limit}&q=${searchName}`
+    );
+  };
+
+  const handleSearchIcon = (value) => {
+    navigate(
+      `${pathname}?_order=desc&_sort=id&_page=${page}&_limit=${limit}&q=${value}`
+    );
   };
 
   const handleSearch = ({ target }) => {
     const value = target.value;
-    navigate(`${pathname}?_page=${page}&_limit=${limit}&q=${value}`);
+    navigate(
+      `${pathname}?_order=desc&_sort=id&_page=${page}&_limit=${limit}&q=${value}`
+    );
   };
-  
+
   return allAccount.data === [] ? (
     <div>Loading...</div>
   ) : (
@@ -58,6 +68,7 @@ export default function Accounts({
         allowClear
         placeholder="계좌번호를 입력해주세요."
         className="mb-4 w-2/5"
+        onSearch={handleSearchIcon}
         onPressEnter={handleSearch}
       />
       <Table
@@ -79,4 +90,4 @@ export default function Accounts({
       />
     </>
   );
-}
+};
