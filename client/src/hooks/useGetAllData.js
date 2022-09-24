@@ -31,6 +31,7 @@ export default function useGetAllData() {
         navigate('/');
       },
     },
+
     {
       queryKey: ['all_accounts'],
       queryFn: () => getAccounts(),
