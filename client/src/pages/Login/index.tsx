@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { message } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,12 @@ export default function Login() {
   const [errorPassword, setErrorPassword] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (storage.get('accessToken')) {
+      navigate('/');
+    }
+  }, []);
 
   const onChangeUserEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

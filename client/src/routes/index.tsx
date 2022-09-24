@@ -10,6 +10,7 @@ export default function Router() {
           <Route path="/" element={<Admin />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/user/:id" element={<User />} />
+          <Route path="*" element={<Admin />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
