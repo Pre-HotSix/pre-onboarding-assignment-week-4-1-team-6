@@ -14,6 +14,7 @@ SiderLayout.propTypes = {
 
 export default function SiderLayout({ collapsed }) {
   const { pathname } = getParameter();
+  const split_pathname = pathname.split('/');
   useGetAllData();
 
   const logout = () => {
@@ -57,7 +58,7 @@ export default function SiderLayout({ collapsed }) {
         className="p-0"
         theme="dark"
         items={items}
-        defaultSelectedKeys={[pathname]}
+        defaultSelectedKeys={['/' + split_pathname[1]]}
       />
     </Sider>
   );
