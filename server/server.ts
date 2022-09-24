@@ -10,6 +10,9 @@ const rules = auth.rewriter({
   users: 660,
   userSetting: 660,
   accounts: 660,
+  brokers: 440,
+  brokerFormat: 440,
+  accountStatus: 440
 })
 
 app.use(rules)
