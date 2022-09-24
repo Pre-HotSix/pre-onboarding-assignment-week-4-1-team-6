@@ -30,7 +30,7 @@ export default function Accounts({
   const [getUsersPage] = useQueries([
     {
       queryKey: ['accounts', params],
-      queryFn: () => getAccountData(params),
+      queryFn: () => getAccountData(`${params}`),
       onSuccess: ({ data }) => {
         if (searchName.length > 0) setTotal(data.length);
         setAccounts([...data.filter((account) => account.uuid !== undefined)]);
@@ -49,7 +49,7 @@ export default function Accounts({
     const value = target.value;
     navigate(`${pathname}?_page=${page}&_limit=${limit}&q=${value}`);
   };
-
+  
   return allAccount.data === [] ? (
     <div>Loading...</div>
   ) : (

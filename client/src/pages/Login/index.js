@@ -73,6 +73,6 @@ export default function Login() {
       </Form.Item>
     </Form>
   ) : (
-    <Navigate replace to={'/accounts?_page=1&_limit=10&q='} />
+    <Navigate replace to={'/accounts?_order=desc&_sort=id&_page=1&_limit=10&q='} />
   );
 }

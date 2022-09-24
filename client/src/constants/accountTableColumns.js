@@ -16,7 +16,7 @@ export default function ACCOUNT_TABLE_COLUMNS() {
       title: '계좌번호',
       dataIndex: 'number',
       render: (number) => (
-        <Link to={`/accounts?q=${number}`}>{Masking.text(number)}</Link>
+        <Link to={`/accounts?number=${number}`}>{Masking.text(number)}</Link>
       ),
       width: 120,
       fixed: 'left',
@@ -25,11 +25,13 @@ export default function ACCOUNT_TABLE_COLUMNS() {
     {
       title: '고객명',
       dataIndex: 'user_id',
-      render: (user_id) => (
-        <Link to={`/users?q=${Convert.owner(allUser.data, user_id)}`}>
-          {Masking.text(Convert.owner(allUser.data, user_id))}
-        </Link>
-      ),
+      render: (user_id) => {
+        return (
+          <Link to={`/users/${user_id}`}>
+            {Masking.text(Convert.owner(allUser.data, user_id))}
+          </Link>
+        );
+      },
       width: 120,
       fixed: 'left',
       align: 'center',

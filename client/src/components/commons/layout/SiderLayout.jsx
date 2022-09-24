@@ -6,6 +6,7 @@ import { removeToken } from 'utils/Storage';
 import PropTypes from 'prop-types';
 import { getParameter } from 'utils/GetParams';
 import { useGetAllData } from 'hooks';
+import LOGO from 'assets/logo.png';
 
 SiderLayout.propTypes = {
   collapsed: PropTypes.bool,
@@ -17,14 +18,13 @@ export default function SiderLayout({ collapsed }) {
 
   const logout = () => {
     removeToken();
-    window.location.reload();
   };
 
   const items = [
     {
       key: '/accounts',
       label: (
-        <Link to={'accounts?_page=1&_limit=10&q='}>
+        <Link to={'/accounts?_order=desc&_sort=id&_page=1&_limit=10&q='}>
           <span>계좌 목록</span>
         </Link>
       ),
@@ -33,7 +33,7 @@ export default function SiderLayout({ collapsed }) {
     {
       key: '/users',
       label: (
-        <Link to={'users?_page=1&_limit=10&q='}>
+        <Link to={'/users?_order=desc&_sort=id&_page=1&_limit=10&q='}>
           <span>사용자 목록</span>
         </Link>
       ),
@@ -41,15 +41,24 @@ export default function SiderLayout({ collapsed }) {
     },
     {
       key: 'logout',
-      label: <span onClick={logout}>로그아웃</span>,
+      label: (
+        <Link to={'/'} onClick={logout}>
+          <span>로그아웃</span>
+        </Link>
+      ),
       icon: <LogoutOutlined />,
     },
   ];
 
   return (
     <Sider collapsed={collapsed} width={'15%'}>
-      <div className="h-10 text-white text-center align-middle">로고</div>
-      <Menu theme="dark" items={items} defaultSelectedKeys={[pathname]} />
+      <img src={LOGO} className="w-20 h-20 mx-auto" />
+      <Menu
+        className="p-0"
+        theme="dark"
+        items={items}
+        defaultSelectedKeys={[pathname]}
+      />
     </Sider>
   );
 }

@@ -13,7 +13,7 @@ export default function DescriptUser({ user, allAccount, userSetting }) {
     <Descriptions title="사용자 정보" bordered>
       <Descriptions.Item label="이름">
         <div className="flex flex-row">
-          <img width={20} height={20} src={user.photo} />
+          {!user.photo ? null : <img width={20} height={20} src={user.photo} />}
           <div>{user.name}</div>
         </div>
       </Descriptions.Item>
@@ -33,7 +33,7 @@ export default function DescriptUser({ user, allAccount, userSetting }) {
         {Convert.address(user.address, user.detail_address)}
       </Descriptions.Item>
       <Descriptions.Item label="생년월일">
-        {Convert.date(user.birth_date)}
+        {!user.birth_date ? null : Convert.date(user.birth_date)}
       </Descriptions.Item>
       <Descriptions.Item label="최근로그인">
         {Convert.date(user.last_login)}
