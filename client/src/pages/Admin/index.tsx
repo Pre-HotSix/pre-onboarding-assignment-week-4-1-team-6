@@ -1,26 +1,11 @@
 import { GlobalContext } from 'App';
-import { storage } from 'commons';
 import { Account, User } from 'pages';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 export default function Admin() {
-  const { menuQuery, setDetailId, setUserInfo } = useContext(GlobalContext);
+  const { menuQuery, setDetailId } = useContext(GlobalContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!storage.get('accessToken')) {
-      navigate('/login');
-    } else {
-      const userData = storage.get('accessToken');
-      if (!userData) {
-        throw new Error('No saved userData');
-      }
-      const saveUser = JSON.parse(userData);
-
-      setUserInfo(saveUser);
-    }
-  }, [navigate, setUserInfo]);
 
   const onClickMoveToUserDetail = (id: number) => {
     navigate(`/user/${id - 1}`);
@@ -35,7 +20,6 @@ export default function Admin() {
       {Number(menuQuery) === 1 && (
         <User onClickMoveToUserDetail={onClickMoveToUserDetail} />
       )}
-      {/* {params[1] === 'user' && <UserDetail />} */}
     </>
   );
 }

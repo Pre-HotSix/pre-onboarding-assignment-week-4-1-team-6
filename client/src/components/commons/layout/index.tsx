@@ -16,9 +16,24 @@ import { storage } from 'commons';
 
 export default function LayoutIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { menuQuery, setMenuQuery, userInfo } = useContext(GlobalContext);
+  const { menuQuery, setMenuQuery, userInfo, setUserInfo } =
+    useContext(GlobalContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!storage.get('accessToken')) {
+      navigate('/login');
+    } else {
+      const userData = storage.get('accessToken');
+      if (!userData) {
+        throw new Error('No saved userData');
+      }
+      const saveUser = JSON.parse(userData);
+
+      setUserInfo(saveUser);
+    }
+  }, [navigate, setUserInfo]);
 
   useEffect(() => {
     setMenuQuery(searchParams.getAll('menu'));
