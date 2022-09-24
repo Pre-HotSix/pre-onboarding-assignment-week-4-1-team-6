@@ -7,9 +7,17 @@
 <br/>
 
 ## 구현 영상
-https://user-images.githubusercontent.com/103626175/192110221-8c4affa4-aa9d-40c7-9804-c6eeeaf414e8.mp4
+authenticated 관련
 
-https://user-images.githubusercontent.com/103626175/192110285-61a104c9-2aca-42e2-b73b-76bd2a6647ed.mp4
+https://user-images.githubusercontent.com/103626175/192113638-4cff6e87-1a59-4aeb-8c95-1de9c6017f40.mp4
+
+계좌 관련
+
+https://user-images.githubusercontent.com/103626175/192113662-29b8176e-6794-463f-bd2b-c42887de253c.mp4
+
+
+
+https://user-images.githubusercontent.com/103626175/192113698-66c7283c-32c7-4112-8b16-dfb1036beabf.mp4
 
 <br/>
 
