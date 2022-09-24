@@ -7,20 +7,9 @@
 <br/>
 
 ## 구현 영상
-authenticated관련
+https://user-images.githubusercontent.com/103626175/192110221-8c4affa4-aa9d-40c7-9804-c6eeeaf414e8.mp4
 
-https://user-images.githubusercontent.com/103626175/192113638-4cff6e87-1a59-4aeb-8c95-1de9c6017f40.mp4
-
-계좌 관련
-
-https://user-images.githubusercontent.com/103626175/192113662-29b8176e-6794-463f-bd2b-c42887de253c.mp4
-
-사용자 관련
-
-https://user-images.githubusercontent.com/103626175/192113698-66c7283c-32c7-4112-8b16-dfb1036beabf.mp4
-
-
-
+https://user-images.githubusercontent.com/103626175/192110285-61a104c9-2aca-42e2-b73b-76bd2a6647ed.mp4
 
 <br/>
 
@@ -51,24 +40,20 @@ https://user-images.githubusercontent.com/103626175/192113698-66c7283c-32c7-4112
 
 ## 실행 방법
 
-레포지토리를 `clone` 합니다
+1. 레포지토리를 `clone` 합니다
 ```markdown
 $ git clone https://github.com/Pre-HotSix/pre-onboarding-assignment-week-4-1-team-6
 ```
-dependencies를 설치합니다
+2. server 더미 데이터를 생성 및 실행합니다
 ```markdown
-$ npm install
-```
-server 더미 데이터를 생성합니다.
-```markdown
+$ cd server
 $ npm run gen
-```
-server 레포지토리에서 api 서버를 실행합니다
-```markdown
 $ npm start
 ```
-프로젝트를 실행합니다
+3. dependencies를 설치하고, 프로젝트를 실행합니다
 ```markdown
+$ cd client
+$ npm install
 $ npm start
 ```
 <br/>
