@@ -1628,9 +1628,22 @@
       "id": 103
     },
     {
-      "email": "hello15@naver.com",
-      "password": "$2a$10$XJ.L0hvJHOUWlFcPQXb7R.noaXSedSQw9QgL2dCKLImR02Uw3/NgW",
-      "id": 104
+      "email": "hello144@naver.com",
+      "password": "$2a$10$ZUoiVGvu5pxBUo0B7ZgAjexEj1mnxPBYSb6DUD9Z1B6RZQ/3TRVd2",
+      "name": "헬로우144",
+      "phone_number": "010-0000-0000",
+      "last_login": "2022-09-24T11:34:46.764Z",
+      "created_at": "2022-09-24T11:34:46.764Z",
+      "id": 105
+    },
+    {
+      "email": "hello145@naver.com",
+      "password": "$2a$10$RRXKf/j.U523cb5bCP9/BuuqLmCFCKeWrvjACZqkTvClzHuZ/8YUa",
+      "name": "헬로우145",
+      "phone_number": "010-2222-2222",
+      "last_login": "2022-09-24T11:35:26.201Z",
+      "created_at": "2022-09-24T11:35:26.201Z",
+      "id": 106
     }
   ],
   "userSetting": [

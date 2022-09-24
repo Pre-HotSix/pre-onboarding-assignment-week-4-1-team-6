@@ -2,7 +2,7 @@ import { Layout  } from 'components';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { PAGE_URL_USERS, pageUrlUsers } from 'constants';
+import { PAGE_URL_USERS, pageUrlUsers, BaseUrlAccounts } from 'constants';
 import { UserList, UserDetail } from './components';
 import { brokersThunk } from 'redux/modules/brokers';
 import { brokerFormatThunk } from 'redux/modules/brokerFormat';
@@ -24,7 +24,7 @@ function UserPage() {
     dispatch(brokerFormatThunk(token));
     dispatch(accountStatusThunk(token));
 
-    dispatch(getAccountsThunk(token, ''));
+    dispatch(getAccountsThunk(token, BaseUrlAccounts('')));
     dispatch(getSettingThunk(token));
   }, []);
 

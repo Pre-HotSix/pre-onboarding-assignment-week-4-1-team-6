@@ -1,5 +1,5 @@
 import { Layout  } from 'components';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PAGE_URL_ACCOUNTS, pageUrlAccounts } from 'constants';
