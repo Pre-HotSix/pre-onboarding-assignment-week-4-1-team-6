@@ -1,17 +1,15 @@
-import SearchBar from 'components/Search';
 import { ChangeEvent, SetStateAction, useState } from 'react';
 import './style.css';
 import _ from 'lodash';
 import List from './List';
 import { IUser } from 'types/User.type';
 import { IUsers } from './type';
+import { SearchBar } from 'components';
 
 export default function UserList({ user, onClickMoveToUserDetail }: IUsers) {
   const [keyword, setKeyword] = useState<string>();
   const [searchList, setSearchList] = useState<boolean>(false);
   // const [clickPage, setClickPage] = useState(1);
-
-  console.log('user', user);
 
   const getDebounce = _.debounce((data: SetStateAction<string | undefined>) => {
     setKeyword(data);

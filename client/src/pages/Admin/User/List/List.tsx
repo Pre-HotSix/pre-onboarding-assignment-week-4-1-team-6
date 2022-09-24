@@ -1,6 +1,6 @@
 import { DateToString, GetDate, NameMasking } from 'commons';
 import PhonNumber from 'commons/utils/PhoneNumber';
-import SwitchButton from 'components/SwitchButton/SwitchButton';
+import { SwitchButton } from 'components';
 import { IInfo } from './type';
 
 export default function List({ user, onClickMoveToUserDetail }: IInfo) {

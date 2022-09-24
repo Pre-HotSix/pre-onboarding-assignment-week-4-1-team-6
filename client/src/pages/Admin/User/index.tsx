@@ -12,7 +12,7 @@ export default function UserPage({ onClickMoveToUserDetail }: any) {
 
   useEffect(() => {
     setDetailId(params[2]);
-  }, []);
+  }, [params, setDetailId]);
 
   return (
     <>

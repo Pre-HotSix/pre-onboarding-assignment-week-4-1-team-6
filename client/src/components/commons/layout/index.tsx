@@ -12,10 +12,11 @@ import './style.css';
 import MenuText from '../../../sider.json';
 import { IItem } from './type';
 import { GlobalContext } from 'App';
+import { storage } from 'commons';
 
 export default function LayoutIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { menuQuery, setMenuQuery } = useContext(GlobalContext);
+  const { menuQuery, setMenuQuery, userInfo } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export default function LayoutIndex() {
     navigate(`/?menu=${index}`);
 
     if (index === 2) {
-      localStorage.removeItem('accessToken');
+      storage.remove('accessToken');
       alert('로그아웃 되었습니다.');
       navigate('/login');
     }
@@ -72,7 +73,9 @@ export default function LayoutIndex() {
         ))}
       </Sider>
       <Layout className="site-layout">
-        <Header className="site-layout-background"></Header>
+        <Header className="site-layout-background">
+          {userInfo?.user?.email.split('@')[0]}님 환영합니다
+        </Header>
         <Content className="site-layout-background">
           <Outlet />
         </Content>

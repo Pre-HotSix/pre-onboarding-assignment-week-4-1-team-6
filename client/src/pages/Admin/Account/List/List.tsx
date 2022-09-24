@@ -1,9 +1,9 @@
 import { IUser } from 'types/User.type';
 import { IInfo } from './type';
-import SwitchButton from 'components/SwitchButton/SwitchButton';
 import Broker from '../../../../brokers.json';
 import AccountStatus from '../../../../accountStatus.json';
 import { AccountNumber, GetDate, GetStatus } from 'commons';
+import { SwitchButton } from 'components';
 
 export default function List({
   info,
@@ -14,9 +14,9 @@ export default function List({
 }: IInfo) {
   const Brokers: { [key: string]: string } = Broker;
 
-  const onChangeActive = (e: any) => {
-    console.log(e);
-  };
+  // const onChangeActive = (e: any) => {
+  //   console.log(e);
+  // };
 
   return (
     <tr>
